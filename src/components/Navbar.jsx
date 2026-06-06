@@ -13,7 +13,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "welcome", href: "welcome" },
     { name: "who am i", href: "whoami" },
-    { name: "why me", href: "whyme" },
+    { name: "why me", href: "why-me" },
     { name: "why btw", href: "why-btw" },
     { name: "skills", href: "skills" },
     { name: "answers", href: "answers" },
