@@ -63,7 +63,7 @@ const Hero = () => {
             </h2>
             <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
               Мене звати <span className="text-white font-semibold">Аня</span>,
-              і це моя мотивашка на посаду IT responsible{" "}
+              і це моя мотивашка на посаду<span className="text-white font-semibold"> IT responsible </span>{" "}
               <span className="text-euphoria-pink font-semibold">BTW</span>,
               через яку я хочу показати не тільки свої технічні скіли, а й те,
               як я відчуваю цей івент і яку атмосферу хочу в нього принести. ✨
