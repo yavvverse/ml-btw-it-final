@@ -9,13 +9,11 @@ import {
 import { useEffect, useState } from "react";
 
 const FinalCTA = () => {
-  // Налаштування для паралакс-ефекту фону від миші
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      // Вираховуємо позицію миші відносно центру екрану (-0.5 до 0.5)
       mouseX.set(e.clientX / window.innerWidth - 0.5);
       mouseY.set(e.clientY / window.innerHeight - 0.5);
     };
@@ -23,7 +21,6 @@ const FinalCTA = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Трансформуємо позицію миші в невеликий зсув для елементів фону (Slower layer)
   const moveXSlow = useTransform(mouseX, [-0.5, 0.5], [10, -10]);
   const moveYSlow = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
 
@@ -36,29 +33,30 @@ const FinalCTA = () => {
       {/* ЦІКАВИЙ ІНТЕРАКТИВНИЙ ФОН 🔥               */}
       {/* ========================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Базовий шум */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay"></div>
+        {/* ОПТИМІЗАЦІЯ: Прибрано mix-blend-overlay, просто залишено opacity */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]"></div>
 
         {/* 1. КІБЕР-СІТКА (Perspective Grid) */}
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03] mix-blend-overlay [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
+        {/* ОПТИМІЗАЦІЯ: Прибрано mix-blend-overlay */}
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.06] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
 
         {/* 2. НОВИЙ ШАР: ДИСКО-СІТКА ТА ГЛІТТЕР ✨💎 */}
-        {/* Неонова диско-сітка */}
         <motion.div
           animate={{ scale: [1, 1.05, 1], opacity: [0.03, 0.05, 0.03] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 bg-[url('/mirror-pattern.svg')] bg-[length:120px_120px] opacity-[0.03] mix-blend-screen"
+          className="absolute inset-0 bg-[url('/mirror-pattern.svg')] bg-[length:120px_120px] opacity-[0.03] mix-blend-screen will-change-transform"
         />
 
         {/* Миготливі блискітки (Глітер) */}
-        {[...Array(50)].map((_, i) => (
+        {/* ОПТИМІЗАЦІЯ: Зменшено кількість до 25 (цього візуально достатньо) та прибрано drop-shadow */}
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={`glitter-${i}`}
-            className="absolute"
+            className="absolute will-change-transform"
             style={{
               width: Math.random() * 6 + 3 + "px",
               height: Math.random() * 6 + 3 + "px",
-              color: i % 2 === 0 ? "#EC4899" : "#8B5CF6", // Рожеві та фіолетові
+              color: i % 2 === 0 ? "#EC4899" : "#8B5CF6",
               left: Math.random() * 100 + "%",
               top: Math.random() * 100 + "%",
             }}
@@ -77,14 +75,14 @@ const FinalCTA = () => {
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-full h-full drop-shadow-[0_0_10px_currentColor]"
+              className="w-full h-full"
             >
               <path d="M12 0C12 0 12 10.5 24 12C12 13.5 12 24 12 24C12 24 12 13.5 0 12C12 10.5 12 0 12 0Z" />
             </svg>
           </motion.div>
         ))}
 
-        {/* 3. ПОТІК КОДУ (Digital Rain - Субтильний) */}
+        {/* 3. ПОТІК КОДУ (Digital Rain) */}
         <div className="absolute inset-0 flex justify-around opacity-[0.02] text-xs font-mono text-euphoria-blue [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
           {[...Array(10)].map((_, i) => (
             <motion.div
@@ -96,7 +94,7 @@ const FinalCTA = () => {
                 ease: "linear",
                 delay: Math.random() * -20,
               }}
-              className="whitespace-nowrap"
+              className="whitespace-nowrap will-change-transform"
               style={{ writingMode: "vertical-rl" }}
             >
               {i % 2 === 0
@@ -108,24 +106,22 @@ const FinalCTA = () => {
 
         {/* 4. ГЛОБАЛЬНЕ СЯЙВО ТА ОРБИ */}
         <div className="absolute inset-0 flex items-center justify-center">
-          {/* Центральний фіолетовий Bloom */}
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.45, 0.3] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute w-[70vw] h-[70vw] bg-euphoria-purple/30 blur-[130px] rounded-full mix-blend-screen"
+            className="absolute w-[70vw] h-[70vw] bg-euphoria-purple/30 blur-[130px] rounded-full mix-blend-screen will-change-transform"
           />
 
-          {/* Рожева смуга */}
           <motion.div
-            style={{ x: moveXSlow, y: moveYSlow }} // Плавний паралакс
-            className="absolute mt-48 w-[80vw] h-[15vh] bg-euphoria-pink/20 blur-[100px] rounded-full mix-blend-screen rotate-[-15deg]"
+            style={{ x: moveXSlow, y: moveYSlow }}
+            className="absolute mt-48 w-[80vw] h-[15vh] bg-euphoria-pink/20 blur-[100px] rounded-full mix-blend-screen rotate-[-15deg] will-change-transform"
           />
         </div>
       </div>
 
       <div className="max-w-[1200px] w-full mx-auto px-6 md:px-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
         {/* ========================================== */}
-        {/* ЗЛІВА: ФОТО-ЗАГЛУШКА (З сяйвом)            */}
+        {/* ЗЛІВА: ФОТО-ЗАГЛУШКА                        */}
         {/* ========================================== */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -134,20 +130,14 @@ const FinalCTA = () => {
           transition={{ duration: 0.7 }}
           className="relative group w-48 h-48 md:w-64 md:h-64 flex-shrink-0 mx-auto md:mx-0 rounded-full border-4 border-euphoria-pink shadow-[0_0_50px_#EC4899] p-2 bg-white/5"
         >
-          {/* Твоє фанове фото (заглушка) */}
           <div className="w-full h-full rounded-full bg-[#0B0914] overflow-hidden relative group">
             <img
               src="/photo_btw.jpg"
-              // object-cover змушує фото зберігати пропорції і заповнювати весь контейнер (обрізаючи зайве)
-              // object-center центрує обрізку (якщо хочеш обрізати по верхньому краю, можна змінити на object-top)
+              loading="lazy" // Ліниве завантаження для оптимізації
               className="w-full h-full object-cover object-center"
             />
-
-            {/* Гейм ефект при наведенні */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent scale-[2] -rotate-12 translate-x-[-100%] translate-y-[-100%] group-hover:translate-x-[100%] group-hover:translate-y-[100%] transition-transform duration-1000" />
           </div>
-
-          {/* Мерехтливе світіння під фото */}
           <div className="absolute -inset-1.5 rounded-full bg-euphoria-pink blur-md opacity-30 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
         </motion.div>
 
@@ -161,9 +151,6 @@ const FinalCTA = () => {
           transition={{ duration: 0.7 }}
           className="w-full md:w-auto text-center md:text-left flex flex-col items-center md:items-start"
         >
-          {/* РАКЕТУ ВИДАЛЕНО, ТЕКСТ ЗАГОЛОВКА ОНОВЛЕНО */}
-
-          {/* ФІКС БАГУ З ТЕКСТОМ: Прибрано text-transparent bg-clip-text, щоб текст не обрізався в Safari */}
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter mb-6 leading-normal md:leading-snug drop-shadow-lg text-left">
             <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
               READY FOR
@@ -181,7 +168,7 @@ const FinalCTA = () => {
           </p>
 
           {/* ========================================== */}
-          {/* КНОПКА ТЕЛЕГРАМ (З ЛЕВІТАЦІЄЮ)             */}
+          {/* КНОПКА ТЕЛЕГРАМ                            */}
           {/* ========================================== */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -190,28 +177,21 @@ const FinalCTA = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="relative group"
           >
-            {/* Анімований фон-світіння, який розширюється при наведенні */}
+            {/* ОПТИМІЗАЦІЯ: Замість анімації boxShadow анімуємо opacity для статичної тіні */}
             <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(139,92,246,0.3)",
-                  "0 0 60px rgba(236,72,153,0.5)",
-                  "0 0 20px rgba(139,92,246,0.3)",
-                ],
-              }}
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -inset-1.5 bg-gradient-to-r from-euphoria-purple to-euphoria-pink rounded-[2.2rem] blur-md opacity-40 group-hover:opacity-100 transition duration-500 group-hover:duration-200"
+              className="absolute -inset-1.5 bg-gradient-to-r from-euphoria-purple to-euphoria-pink rounded-[2.2rem] blur-xl will-change-opacity group-hover:opacity-100 transition duration-500"
             />
 
             <motion.a
-              animate={{ y: [-6, 6, -6] }} // Левітація
+              animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              href="https://t.me/ТВІЙ_БОТ" // <--- ЗАМІНИ ЦЕ ПОСИЛАННЯ НА СВОГО БОТА!
+              href="https://t.me/ТВІЙ_БОТ"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative flex items-center gap-5 px-9 py-5 md:px-12 md:py-6 bg-[#0B0914] rounded-[2rem] border border-white/10 leading-none hover:border-euphoria-pink/50 transition-colors"
+              className="relative flex items-center gap-5 px-9 py-5 md:px-12 md:py-6 bg-[#0B0914] rounded-[2rem] border border-white/10 leading-none hover:border-euphoria-pink/50 transition-colors will-change-transform"
             >
-              {/* Іконка Telegram з неон ефектом */}
               <div className="relative w-9 h-9 md:w-11 md:h-11 flex-shrink-0">
                 <div className="absolute inset-0 bg-[#22A9EA] blur-lg opacity-60 group-hover:opacity-100 transition-opacity" />
                 <svg
@@ -228,7 +208,6 @@ const FinalCTA = () => {
                 <span className="text-gray-400 font-mono text-[11px] md:text-xs tracking-[0.25em] uppercase mb-1.5">
                   Open in Telegram
                 </span>
-                {/* ФІКС БАГУ З ТЕКСТОМ: Також прибрано text-transparent bg-clip-text на кнопці для стабільності */}
                 <span className="text-white font-black text-2xl md:text-3xl tracking-tight uppercase transition-all duration-300">
                   Launch Bot
                 </span>
@@ -239,7 +218,7 @@ const FinalCTA = () => {
       </div>
 
       {/* ========================================== */}
-      {/* ФУТЕР (Підпис)                             */}
+      {/* ФУТЕР                                      */}
       {/* ========================================== */}
       <div className="absolute bottom-6 w-full text-center">
         <p className="text-gray-500 font-mono text-xs md:text-sm tracking-[0.2em] uppercase">

@@ -26,7 +26,7 @@ const EuphoriaStars = () => {
         this.speedY = Math.random() * -0.3 - 0.05;
         this.opacity = Math.random();
         this.fadeSpeed = Math.random() * 0.01 + 0.002;
-        this.isStar = Math.random() > 0.8;
+        // isStar тут не використовується, тому я його прибрав для чистоти пам'яті
       }
 
       update() {
@@ -39,22 +39,22 @@ const EuphoriaStars = () => {
       }
 
       draw() {
-        ctx.save();
+        // Малюємо напряму, без save()/restore() та без shadowBlur
         ctx.globalAlpha = Math.max(0, Math.min(1, this.opacity));
         ctx.fillStyle = this.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.restore();
       }
     }
 
     const particles = [];
-    const particleCount = Math.floor(
-      (window.innerWidth * window.innerHeight) / 15000,
+    // Обмежуємо кількість зірок до 200 максимум
+    const particleCount = Math.min(
+      Math.floor((window.innerWidth * window.innerHeight) / 15000),
+      200,
     );
+
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
