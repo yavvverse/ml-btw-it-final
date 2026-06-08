@@ -36,7 +36,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-            className="text-[10vw] md:text-[7vw] lg:text-[6vw] leading-[0.9] font-black uppercase tracking-tighter text-white mb-2"
+            className="text-[10vw] md:text-[7vw] lg:text-[6vw] leading-[0.9] font-black uppercase tracking-tighter text-white mb-2 will-change-transform"
           >
             THIS COULD BE
           </motion.h1>
@@ -44,7 +44,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
-            className="text-[10vw] md:text-[7vw] lg:text-[6vw] leading-[0.9] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-euphoria-purple via-euphoria-pink to-white mb-10 drop-shadow-lg"
+            className="text-[10vw] md:text-[7vw] lg:text-[6vw] leading-[0.9] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-euphoria-purple via-euphoria-pink to-white mb-10 drop-shadow-lg will-change-transform"
           >
             MY BTW ERA
           </motion.h1>
@@ -54,7 +54,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 1.4, ease: "easeOut" }}
-            className="relative p-6 md:p-8 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-euphoria-glow max-w-xl mx-auto lg:mx-0 group hover:bg-white/[0.05] transition-colors duration-500"
+            className="relative p-6 md:p-8 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-euphoria-glow max-w-xl mx-auto lg:mx-0 group hover:bg-white/[0.05] transition-colors duration-500 will-change-transform"
           >
             <div className="absolute -top-3 -left-3 w-8 h-8 bg-euphoria-pink rounded-full blur-[10px] animate-pulse" />
 
@@ -62,11 +62,18 @@ const Hero = () => {
               Хейкааа, Назарее! 👋
             </h2>
             <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              Мене звати <span className="text-white font-semibold">Аня</span>,
-              і це моя мотивашка на посаду<span className="text-white font-semibold"> IT responsible </span>{" "}
-              <span className="text-euphoria-pink font-semibold">BTW</span>,
-              через яку я хочу показати не тільки свої технічні скіли, а й те,
-              як я відчуваю цей івент і яку атмосферу хочу в нього принести. ✨
+              Мене звати <span className="text-white font-semibold">Аня</span> —
+              і я тут не просто щоб розповісти про свої скіли.
+              <br />
+              <br />Я тут щоб показати, як я відчуваю{" "}
+              <span className="text-euphoria-pink font-bold drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]">
+                BTW
+              </span>
+              , яку атмосферу хочу в нього принести — і чому{" "}
+              <span className="text-euphoria-blue font-black tracking-wide uppercase px-2 py-0.5 bg-euphoria-blue/10 border border-euphoria-blue/30 rounded-md">
+                IT responsible
+              </span>{" "}
+              — це саме моя посада. ✨
             </p>
           </motion.div>
         </motion.div>
@@ -75,10 +82,10 @@ const Hero = () => {
         {/* КОЛОНКА 2: МІСЦЕ ПІД ТВОЄ ФОТО             */}
         {/* ========================================== */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85, filter: "blur(15px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.8, delay: 2.0, ease: [0.16, 1, 0.3, 1] }}
-          className="relative flex justify-center items-center h-full min-h-[400px] lg:min-h-[600px]"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative flex justify-center items-center h-full min-h-[400px] lg:min-h-[600px] will-change-transform"
         >
           {/* Світіння на фоні (дихає) */}
           <motion.div
@@ -88,14 +95,14 @@ const Hero = () => {
               rotate: [0, 5, 0],
             }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-gradient-to-r from-euphoria-purple/40 via-euphoria-pink/30 to-euphoria-blue/30 blur-[80px] rounded-full transform scale-90"
+            className="absolute inset-0 bg-gradient-to-r from-euphoria-purple/40 via-euphoria-pink/30 to-euphoria-blue/30 blur-[80px] rounded-full transform scale-90 will-change-transform"
           />
 
           {/* КОНТЕЙНЕР ДЛЯ ФОТО */}
           <motion.div
             animate={{ y: [-12, 12, -12] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-sm overflow-hidden shadow-[0_0_50px_rgba(139,92,246,0.3)] group"
+            className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-[2.5rem] border border-white/20 bg-white/5 backdrop-blur-sm overflow-hidden shadow-[0_0_50px_rgba(139,92,246,0.3)] group will-change-transform"
           >
             <img
               src="/my-photo.jpg"
@@ -116,7 +123,7 @@ const Hero = () => {
               ease: "easeInOut",
               delay: 2.5,
             }}
-            className="absolute top-10 right-4 lg:right-10 w-14 h-14 rounded-full border border-euphoria-pink/30 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg z-20 pointer-events-none"
+            className="absolute top-10 right-4 lg:right-10 w-14 h-14 rounded-full border border-euphoria-pink/30 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg z-20 pointer-events-none will-change-transform"
           >
             <span className="text-xl">✨</span>
           </motion.div>
@@ -135,12 +142,11 @@ const Hero = () => {
               type: "spring",
               stiffness: 300,
               damping: 20,
-              // Анімація обертання тільки якщо спіймали
               rotate: { duration: 0.5 },
             }}
             onMouseEnter={handleBugHover}
             onClick={() => setBugCaught(true)}
-            className="absolute bottom-16 left-4 lg:left-10 z-50 flex items-center cursor-pointer group"
+            className="absolute bottom-16 left-4 lg:left-10 z-50 flex items-center cursor-pointer group will-change-transform"
           >
             <div
               className={`w-16 h-16 rounded-2xl border backdrop-blur-md flex items-center justify-center shadow-lg transition-colors duration-300 ${bugCaught ? "bg-euphoria-blue/20 border-euphoria-blue/50" : "bg-white/5 border-white/20"}`}

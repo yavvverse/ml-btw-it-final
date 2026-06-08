@@ -5,29 +5,74 @@ import { motion, AnimatePresence } from "framer-motion";
 const Answers = () => {
   const [openId, setOpenId] = useState(1);
 
+  // Змінюємо текст на JSX, щоб мати змогу додавати стилізовані слова-пасхалки,
+  // але зберігаємо оригінальний текст Ані
   const faqs = [
     {
       id: 1,
-      q: "Розстав по пріоритетам сфери життя (робота, навчання, BEST, сімʼя, кортіма і тд). Чи зміняться вони, якщо ти потрапиш у кортіму?",
-      a: "Якщо я потраплю в кортіму, то кортіма однозначно на першому місці енівей!!\n\nРозставлені сфери життя: кортіма, бест, сім'я, навчання і роботи нема))",
+      q: "Розстав по пріоритетам сфери життя (робота, навчання, BEST, сім'я, кортіма і тд). Чи зміняться вони, якщо ти потрапиш у кортіму?",
+      a: (
+        <>
+          Якщо я потраплю в{" "}
+          <span className="text-euphoria-pink font-bold drop-shadow-[0_0_5px_rgba(236,72,153,0.5)]">
+            кортіму
+          </span>
+          , то кортіма однозначно на першому місці енівей !!
+          <br />
+          <br />
+          Розставлені сфери життя:{" "}
+          <span className="text-white font-bold tracking-wide">
+            кортіма
+          </span>,{" "}
+          <span className="text-euphoria-blue font-bold drop-shadow-[0_0_5px_rgba(59,130,246,0.5)]">
+            бест
+          </span>
+          , сім'я, навчання і <i className="opacity-80">роботи нема))</i>
+        </>
+      ),
       color: "#EC4899", // Pink
     },
     {
       id: 2,
-      q: "Оціни свою зайнятість від 0 до 10 (10 – дуже зайнятий)",
-      a: "Нуууль! Літо, канікули, чііл)))",
+      q: "Оціни свою зайнятість від 0 до 10 (10 - дуже зайнятий)",
+      a: (
+        <>
+          <span className="text-white font-black text-2xl drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+            Нуууль!
+          </span>
+          <br />
+          Літо, канікули, чіііл)))
+        </>
+      ),
       color: "#8B5CF6", // Purple
     },
     {
       id: 3,
       q: "Твої плани на ближчі 3 місяці і чи будеш ти у Львові?",
-      a: "На літо я їду додому у своє село, але воно в львівській області і в будь-який час я зможу приїхати до Львова.",
+      a: (
+        <>
+          На літо я їду додому у своє село, але воно в львівській області і{" "}
+          <span className="text-white font-medium border-b border-white/30">
+            в будь-який час
+          </span>{" "}
+          я зможу приїхати до Львова.
+        </>
+      ),
       color: "#3B82F6", // Blue
     },
     {
       id: 4,
-      q: "Чи маєш ти навички, не пов’язані з твоєю обраною посадою: монтаж відео, вмієш робити музику, готування?",
-      a: "Звісно! Вмію монтажити, музику хіба на сопілці зіграю, ахахха, і готую дуже смачний львівський сирник та й багато іншого просто сирник розйоб!",
+      q: "Чи маєш ти навички, не пов'язані з твоєю обраною посадою: монтаж відео, вмієш робити музику, готування?",
+      a: (
+        <>
+          Звісно! Вмію <span className="text-white font-medium">монтажити</span>
+          , музику хіба на сопілці зіграю, ахахха, і готую дуже смачний{" "}
+          <span className="text-[#F59E0B] font-bold drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]">
+            львівський сирник
+          </span>{" "}
+          та й багато іншого просто сирник розйоб!
+        </>
+      ),
       color: "#10B981", // Green
     },
   ];
@@ -53,24 +98,24 @@ const Answers = () => {
       className="relative z-10 py-32 bg-[#05020A] border-t border-white/5 overflow-hidden font-sans text-white"
     >
       {/* ========================================== */}
-      {/* АНІМОВАНИЙ ФОН */}
+      {/* АНІМОВАНИЙ ФОН (Оптимізовано для високого FPS) */}
       {/* ========================================== */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Базові туманності, які дихають */}
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-euphoria-blue blur-[150px] rounded-full will-change-transform"
+          className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-euphoria-blue blur-[100px] rounded-full will-change-transform will-change-opacity"
         />
         <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{
             duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2,
           }}
-          className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-euphoria-pink blur-[150px] rounded-full will-change-transform"
+          className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-euphoria-pink blur-[100px] rounded-full will-change-transform will-change-opacity"
         />
 
         {/* Мерехтливі 4-кутні зірочки */}
@@ -156,7 +201,7 @@ const Answers = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-16 will-change-transform"
         >
           <h2 className="text-[12vw] md:text-[6vw] leading-none font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 drop-shadow-lg mb-4">
             Q&A
@@ -176,15 +221,14 @@ const Answers = () => {
                 key={faq.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }} // Картка з'являється швидше (на 10% видимості)
-                // Використовуємо spring замість duration для плавності
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   type: "spring",
                   stiffness: 100,
                   damping: 20,
                   delay: index * 0.1,
                 }}
-                className={`rounded-[2rem] border backdrop-blur-md overflow-hidden transition-colors duration-500 ${
+                className={`rounded-[2rem] border backdrop-blur-md overflow-hidden transition-colors duration-500 will-change-transform ${
                   isOpen
                     ? "bg-white/[0.04] shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
                     : "bg-white/[0.01] hover:bg-white/[0.02]"
@@ -227,7 +271,7 @@ const Answers = () => {
                         stiffness: 200,
                         damping: 15,
                       }}
-                      className="relative w-4 h-4"
+                      className="relative w-4 h-4 will-change-transform"
                     >
                       <span
                         className="absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 rounded-full transition-colors duration-300"
@@ -252,16 +296,17 @@ const Answers = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // Кастомний easing (як в Apple)
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="will-change-transform"
                     >
                       <div className="px-6 pb-8 md:px-8 md:pb-10 pt-0">
                         <div
                           className="pl-6 border-l-2 transition-colors duration-500"
                           style={{ borderColor: `${faq.color}80` }}
                         >
-                          <p className="text-gray-300 font-light leading-relaxed whitespace-pre-line text-base md:text-lg">
+                          <div className="text-gray-300 font-light leading-relaxed whitespace-pre-line text-base md:text-lg">
                             {faq.a}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </motion.div>

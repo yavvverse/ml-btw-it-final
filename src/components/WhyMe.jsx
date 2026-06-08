@@ -36,11 +36,10 @@ const TiltCard = ({ title, description, color, isAnchored, onAnchorClick }) => {
     y.set(0);
   };
 
-  // Перевіряємо, чи це картка-пасхалка
   const isAnchorCard = title === "The Anchor";
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full perspective-1000">
       {/* АНІМАЦІЯ ПАДІННЯ ЛОГОТИПУ BTW (Тільки для Anchor) */}
       <AnimatePresence>
         {isAnchorCard && isAnchored && (
@@ -53,25 +52,24 @@ const TiltCard = ({ title, description, color, isAnchored, onAnchorClick }) => {
               damping: 10,
               mass: 2,
             }}
-            className="absolute top-0 left-1/2 -translate-x-1/2 z-[60] pointer-events-none"
+            className="absolute top-0 left-1/2 -translate-x-1/2 z-[60] pointer-events-none will-change-transform"
           >
             <img
               src="/logo_BTW_white.svg"
               alt="BTW Anchor"
               className="w-24 h-24 drop-shadow-[0_20px_30px_rgba(59,130,246,0.8)] filter transition-all"
             />
-            {/* Ударна хвиля (світіння) */}
             <motion.div
               initial={{ scale: 0, opacity: 1 }}
               animate={{ scale: 3, opacity: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#3B82F6] rounded-full blur-[20px] -z-10"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#3B82F6] rounded-full blur-[20px] -z-10 will-change-transform"
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Обгортка для ефекту придавлювання (Тільки для Anchor) */}
+      {/* Обгортка для ефекту придавлювання */}
       <motion.div
         animate={
           isAnchorCard && isAnchored
@@ -79,7 +77,7 @@ const TiltCard = ({ title, description, color, isAnchored, onAnchorClick }) => {
             : { y: 0, rotateZ: 0, scale: 1 }
         }
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="w-full h-full"
+        className="w-full h-full will-change-transform"
       >
         <motion.div
           ref={cardRef}
@@ -94,7 +92,7 @@ const TiltCard = ({ title, description, color, isAnchored, onAnchorClick }) => {
                 ? `${color}80`
                 : "rgba(255,255,255,0.1)",
           }}
-          className="relative w-full h-full min-h-[450px] rounded-3xl border bg-white/[0.02] backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.05] group"
+          className="relative w-full h-full rounded-3xl border bg-white/[0.02] backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.05] group will-change-transform flex flex-col"
         >
           {/* Голографічний відблиск (Shimmer) */}
           <motion.div
@@ -102,95 +100,80 @@ const TiltCard = ({ title, description, color, isAnchored, onAnchorClick }) => {
               background: `radial-gradient(circle at center, ${color}25 0%, transparent 70%)`,
               opacity: useTransform(mouseXSpring, [-0.5, 0.5], [0, 1]),
             }}
-            className="absolute inset-0 pointer-events-none z-0 group-hover:opacity-100 transition-opacity rounded-3xl"
+            className="absolute inset-0 pointer-events-none z-0 group-hover:opacity-100 transition-opacity rounded-3xl will-change-opacity"
           />
 
-          {/* Вміст картки з ефектом глибини */}
+          {/* Вміст картки з ефектом глибини. Вирівнювання justify-start для однакового рівня заголовків */}
           <div
             style={{ transform: "translateZ(40px)" }}
-            className="relative z-10 p-6 md:p-8 h-full flex flex-col items-center text-center justify-center"
+            className="relative z-10 p-6 md:p-8 h-full flex flex-col items-center text-center justify-start will-change-transform"
           >
             {/* КЛІКАБЕЛЬНА ЧАСТИНА ДЛЯ ТИТЛУ */}
             <div
-              className={`relative w-full mb-6 flex justify-center ${isAnchorCard ? "cursor-pointer z-50" : ""}`}
+              className={`relative w-full mb-6 flex justify-center ${
+                isAnchorCard ? "cursor-pointer z-50" : ""
+              }`}
               onClick={isAnchorCard ? onAnchorClick : undefined}
               title={
                 isAnchorCard && !isAnchored ? "Клікни, щоб кинути якір!" : ""
               }
             >
-              {/* ========================================================= */}
-              {/* НОВА АНІМАЦІЯ ПІДКАЗКИ (Погойдування та пульсуюче світіння) */}
-              {/* ========================================================= */}
               {isAnchorCard && !isAnchored && (
-                <>
-                  {/* Пульсуюче коло на фоні заголовка */}
-                  <motion.div
-                    animate={{
-                      scale: [0.9, 1.1, 0.9],
-                      opacity: [0.2, 0.4, 0.2],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute inset-0 bg-[#3B82F6]/20 blur-xl rounded-full pointer-events-none group-hover:bg-[#3B82F6]/40 transition-colors"
-                  />
-
-                  {/* Сама обгортка тексту, яка плавно гойдається вверх-вниз */}
-                  <motion.div
-                    animate={{ y: [-3, 3, -3] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="flex flex-col items-center justify-center relative w-full"
-                  >
-                    <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-[#3B82F6] group-hover:opacity-0 transition-opacity duration-500">
-                      {title}
-                    </h3>
-                    <h3
-                      className="text-xl md:text-2xl font-black uppercase tracking-tighter absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex justify-center text-transparent bg-clip-text"
-                      style={{
-                        backgroundImage: `linear-gradient(to right, #ffffff, ${color})`,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      {title}
-                    </h3>
-                  </motion.div>
-                </>
+                <motion.div
+                  animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.1, 0.3, 0.1] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 bg-white/20 blur-xl rounded-full pointer-events-none transition-colors will-change-transform"
+                />
               )}
 
-              {/* Звичайне відображення для інших карток або коли якір вже активовано */}
-              {(!isAnchorCard || isAnchored) && (
-                <>
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-[#6D28D9] group-hover:opacity-0 transition-opacity duration-500">
-                    {title}
-                  </h3>
-                  <h3
-                    className="text-xl md:text-2xl font-black uppercase tracking-tighter absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex justify-center text-transparent bg-clip-text"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, #ffffff, ${color})`,
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    {title}
-                  </h3>
-                </>
-              )}
+              {/* Звичайне відображення (БІЛЕ ДО ХОВЕРА) */}
+              <motion.div
+                animate={isAnchorCard && !isAnchored ? { y: [-3, 3, -3] } : {}}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="flex flex-col items-center justify-center relative w-full will-change-transform"
+              >
+                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white group-hover:opacity-0 transition-opacity duration-500">
+                  {title}
+                </h3>
+                <h3
+                  className="text-xl md:text-2xl font-black uppercase tracking-tighter absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex justify-center text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage: `linear-gradient(to right, #ffffff, ${color})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {title}
+                </h3>
+              </motion.div>
             </div>
 
-            <div className="text-gray-400 font-light leading-relaxed group-hover:text-gray-200 transition-colors text-sm md:text-base">
+            {/* Текст опису (збільшений відступ знизу для декоративної лінії) */}
+            <div className="text-gray-400 font-light leading-relaxed transition-colors text-sm md:text-base pb-6">
               {description}
             </div>
 
-            {/* Декоративна лінія знизу */}
+            {/* Декоративна лінія знизу (завжди внизу завдяки margin-top: auto) */}
             <div
-              className="absolute bottom-6 w-12 h-1 rounded-full transition-all duration-500 group-hover:w-24"
+              className="absolute bottom-6 w-12 h-1 rounded-full transition-all duration-500 group-hover:w-24 bg-white/20 group-hover:bg-transparent"
+              style={{
+                // Щоб колір застосовувався тільки на hover, використаємо змінну стилю
+                "--hover-color": color,
+              }}
+              // Tailwind hack: додаємо стиль через кастомний CSS
+            />
+            {/* Для лінії робимо хитрий трюк: 2 шари */}
+            <div className="absolute bottom-6 w-12 h-1 rounded-full bg-white/20 transition-all duration-500 group-hover:opacity-0" />
+            <div
+              className="absolute bottom-6 w-12 h-1 rounded-full opacity-0 transition-all duration-500 group-hover:w-24 group-hover:opacity-100"
               style={{ backgroundColor: color, boxShadow: `0 0 15px ${color}` }}
             />
           </div>
@@ -214,20 +197,30 @@ const WhyMe = () => {
       title: "The Visionary",
       color: "#EC4899", // Рожевий
       description: (
-        <p>
-          Для мене важливо, щоб проєкт викликав емоції і запам’ятовувався з
-          перших секунд. І пишучи цю мотивашку, зрозуміла, що мені дуже хочеться
-          не просто перетворювати дизайн на сайт, а й додавати щось своє:{" "}
-          <span className="text-white font-medium">
-            якісь креативні деталі, анімації, пасхалки
-          </span>{" "}
-          <span className="italic opacity-70">
-            (спробуй зловити 🛸, і в розповідях знайти виділені слова, вони теж
-            пасхалки, спробуй знайти усі)))))
-          </span>{" "}
-          чи фішки, які роблять проєкт живим і розйобним. Тому готова
-          викладатись на всі 100%, щоб сайт і бот були незабутніми!!
-        </p>
+        <div className="space-y-3">
+          <p>
+            Для мене важливо, щоб проєкт не просто існував, а викликав емоції з
+            першої секунди. Коли людина відкриває сайт{" "}
+            <span className="font-bold text-white transition-all duration-500 group-hover:text-euphoria-pink group-hover:drop-shadow-[0_0_5px_rgba(236,72,153,0.5)]">
+              BTW
+            </span>
+            , я хочу, щоб вона одразу відчула: це буде щось особливе. Не просто
+            "ось інформація і розклад", а щось живе — з характером і тим самим
+            вайбом, який є в самому івенті.
+          </p>
+          <p>
+            Тому я не просто переношу дизайн у код — я думаю про кожен елемент.{" "}
+            <span className="font-medium text-white transition-colors duration-500 group-hover:text-euphoria-pink">
+              Анімації, пасхалки
+            </span>{" "}
+            <span className="italic opacity-70">
+              (спробуй зловити 🛸, і в розповідях знайти виділені слова, вони
+              теж пасхалки, спробуй знайти усі))))
+            </span>
+            , маленькі фішки, які помічають не всі — саме вони роблять проєкт
+            таким, що його запам'ятовують. І я готова викладатись на повну!
+          </p>
+        </div>
       ),
     },
     {
@@ -235,12 +228,23 @@ const WhyMe = () => {
       color: "#8B5CF6", // Фіолетовий
       description: (
         <p>
-          Я дуже швидко вчусь через практику: курси, YouTube, документація - і
-          одразу все тестую в коді. Коли потрапила в BEST, мені довелось{" "}
-          <span className="text-white font-medium">з нуля освоювати React</span>
-          , але я настільки втягнулась, що досить швидко почала самостійно
-          збирати власні проєкти і вчитись як робити круто. Я не боюсь помилок,
-          бо це дає змогу краще розуміти, як усе працює.
+          Я вчусь дуже швидко — і завжди через практику. Курси, YouTube,
+          документація — і одразу все тестую в коді, бо тільки так воно реально
+          засвоюється. Коли я потрапила в{" "}
+          <span className="font-bold text-white transition-all duration-500 group-hover:text-[#8B5CF6] group-hover:drop-shadow-[0_0_5px_rgba(139,92,246,0.5)]">
+            BEST
+          </span>
+          , мені довелось з нуля освоювати{" "}
+          <span className="font-medium text-white transition-all duration-500 group-hover:text-[#8B5CF6] group-hover:drop-shadow-[0_0_5px_rgba(139,92,246,0.5)]">
+            React
+          </span>{" "}
+          — і я так втягнулась, що досить швидко почала збирати власні проєкти і
+          розбиратись, як робити не просто правильно, а круто. Я{" "}
+          <span className="font-medium text-white border-b border-white/30 transition-colors duration-500 group-hover:border-[#8B5CF6]/50 group-hover:text-gray-200">
+            не боюсь помилок
+          </span>{" "}
+          — більше того, я їх люблю, бо кожна помилка дає зрозуміти те, що ніяка
+          теорія не пояснить.
         </p>
       ),
     },
@@ -249,15 +253,22 @@ const WhyMe = () => {
       color: "#3B82F6", // Синій
       description: (
         <p>
-          Для мене дуже важливо навіть у складних ситуаціях{" "}
-          <span className="text-white font-medium">
-            не зациклюватись на негативі, а шукати рішення і рухатись далі
+          Коли щось йде не за планом — а в роботі над івентом це буває — я не
+          зависаю в паніці і не починаю шукати, хто винен. Я швидко перемикаюсь
+          і думаю,{" "}
+          <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#3B82F6]">
+            що можна зробити прямо зараз
           </span>
-          . Думаю, це одна з моїх сильних сторін не тільки для роботи в команді,
-          а й для підтримки її атмосфери загалом. Навіть коли щось йде не за
-          планом, я стараюсь не панікувати, а навпаки - швидко зібратись,
-          подивитись на проблему більш раціонально і допомогти іншим не втрачати
-          мотивацію.
+          . Думаю, це одна з моїх реально сильних сторін: вміти зберігати{" "}
+          <span className="font-bold text-white transition-all duration-500 group-hover:text-[#3B82F6] group-hover:drop-shadow-[0_0_5px_rgba(59,130,246,0.5)]">
+            холодну голову
+          </span>{" "}
+          тоді, коли все навколо горить. Для{" "}
+          <span className="font-mono bg-white/10 px-1.5 py-0.5 rounded transition-colors duration-500 group-hover:bg-[#3B82F6]/20 group-hover:text-[#3B82F6] text-white">
+            IT-посади
+          </span>{" "}
+          під час івенту це критично — бо якщо щось ламається за 20 хвилин до
+          початку, команді потрібна людина, яка вирішує проблему.
         </p>
       ),
     },
@@ -266,14 +277,19 @@ const WhyMe = () => {
       color: "#10B981", // Смарагдовий
       description: (
         <p>
-          Я відповідально ставлюсь до всього, за що беруся, і не боюсь брати на
-          себе відповідальність за рішення чи задачі. Якщо щось йде не так, я{" "}
-          <span className="text-white font-medium">
-            не шукаю винних і не перекладаю це на інших
+          Я відповідально ставлюсь до всього, за що берусь — і це не просто
+          красиві слова. Якщо задача на мені, вона буде зроблена. Не "зроблена
+          якось", не "зроблена аби здати" — а{" "}
+          <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#10B981]">
+            зроблена так, щоб не соромно було показати команді
           </span>
-          , а стараюсь швидко розібратися. Для мене важливо доводити задачі до
-          кінця і бути людиною, на яку команда зможе покластись у будь-який
-          момент!
+          . Якщо щось іде не так, я не чекаю, поки хтось інший розбереться — я
+          сама розбираюсь і рухаюсь далі. Для мене важливо бути людиною, на яку
+          можна{" "}
+          <span className="font-bold text-white transition-all duration-500 group-hover:text-[#10B981] group-hover:drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]">
+            покластись у будь-який момент
+          </span>
+          , без нагадувань і контролю.
         </p>
       ),
     },
@@ -282,16 +298,21 @@ const WhyMe = () => {
       color: "#F59E0B", // Золотий
       description: (
         <p>
-          Свято дотримуюсь правила{" "}
-          <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(245,158,11,0.8)]">
+          <span className="font-black tracking-wider text-white transition-all duration-500 group-hover:text-[#F59E0B] group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">
             WORK HARD, PARTY HARDER
+          </span>{" "}
+          — і цього я дотримуюсь свято. Для мене BTW — це не лише про технічну
+          роботу. Це про спільний вайб і ті моменти, коли вся{" "}
+          <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#F59E0B]">
+            кортіма
+          </span>{" "}
+          збирається разом. Я хочу зробити продукт, яким ми будемо пишатись — і
+          потім святкувати це разом. Бути на тих зборах,{" "}
+          <span className="font-medium italic text-white transition-colors duration-500 group-hover:text-[#F59E0B]">
+            афтерах і афтерафтерах
           </span>
-          , тому для мене btw - це про людей, неймовірні спогади, пригоди і
-          спільний вайб, який робить весь цей двіж незабутнім. Мені дуже
-          хочеться бути частиною кортіми, з якою можна створити розйобний івент
-          і проживати весь цей досвід разом: збори і легендарні афтери і
-          афтерафтери, про які потім ще довго всі будуть згадувати і робити
-          вайбові відосики!
+          , про які потім ще рік згадують і з яких роблять найвайбовіші
+          відосики!
         </p>
       ),
     },
@@ -308,7 +329,7 @@ const WhyMe = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16 text-center lg:text-left"
+          className="mb-16 text-center lg:text-left will-change-transform"
         >
           <h2 className="text-[12vw] lg:text-[7vw] leading-[0.85] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-euphoria-purple via-euphoria-pink to-white drop-shadow-lg mb-2">
             WHY <br className="hidden lg:block" /> ME
@@ -318,7 +339,7 @@ const WhyMe = () => {
           </p>
         </motion.div>
 
-        {/* СІТКА З КАРТКАМИ */}
+        {/* СІТКА З КАРТКАМИ. Додано items-stretch для вирівнювання висоти */}
         <motion.div
           animate={
             isAnchored
@@ -326,7 +347,7 @@ const WhyMe = () => {
               : {}
           }
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="flex flex-wrap justify-center gap-6 lg:gap-8"
+          className="flex flex-wrap justify-center gap-6 lg:gap-8 items-stretch will-change-transform"
         >
           {cards.map((card, index) => (
             <motion.div
@@ -335,7 +356,7 @@ const WhyMe = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)]"
+              className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] flex will-change-transform"
             >
               <TiltCard
                 {...card}

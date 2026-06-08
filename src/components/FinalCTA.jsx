@@ -187,7 +187,7 @@ const FinalCTA = () => {
             <motion.a
               animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              href="https://t.me/ТВІЙ_БОТ"
+              href="https://t.me/ml_it_btw_YA_bot"
               target="_blank"
               rel="noopener noreferrer"
               className="relative flex items-center gap-5 px-9 py-5 md:px-12 md:py-6 bg-[#0B0914] rounded-[2rem] border border-white/10 leading-none hover:border-euphoria-pink/50 transition-colors will-change-transform"
