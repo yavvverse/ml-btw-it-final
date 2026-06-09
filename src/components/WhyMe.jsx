@@ -199,17 +199,16 @@ const WhyMe = () => {
       description: (
         <div className="space-y-3">
           <p>
-            Для мене важливо, щоб проєкт не просто існував, а викликав емоції з
-            першої секунди. Коли людина відкриває сайт{" "}
+            Для мене важливо, щоб проєкт викликав емоції з першої секунди. Коли
+            людина відкриває сайт{" "}
             <span className="font-bold text-white transition-all duration-500 group-hover:text-euphoria-pink group-hover:drop-shadow-[0_0_5px_rgba(236,72,153,0.5)]">
               BTW
             </span>
-            , я хочу, щоб вона одразу відчула: це буде щось особливе. Не просто
-            "ось інформація і розклад", а щось живе — з характером і тим самим
-            вайбом, який є в самому івенті.
+            , я хочу, щоб вона одразу відчула: це буде щось особливе. Щось живе
+            — з характером і тим самим вайбом, який є в самому івенті.
           </p>
           <p>
-            Тому я не просто переношу дизайн у код — я думаю про кожен елемент.{" "}
+            Тому я постійно думаю про кожен елемент.{" "}
             <span className="font-medium text-white transition-colors duration-500 group-hover:text-euphoria-pink">
               Анімації, пасхалки
             </span>{" "}
@@ -239,7 +238,7 @@ const WhyMe = () => {
             React
           </span>{" "}
           — і я так втягнулась, що досить швидко почала збирати власні проєкти і
-          розбиратись, як робити не просто правильно, а круто. Я{" "}
+          розбиратись, як робити круто. Я{" "}
           <span className="font-medium text-white border-b border-white/30 transition-colors duration-500 group-hover:border-[#8B5CF6]/50 group-hover:text-gray-200">
             не боюсь помилок
           </span>{" "}
@@ -259,16 +258,16 @@ const WhyMe = () => {
           <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#3B82F6]">
             що можна зробити прямо зараз
           </span>
-          . Думаю, це одна з моїх реально сильних сторін: вміти зберігати{" "}
+          . Думаю, це одна з моїх сильних сторін: вміти зберігати{" "}
           <span className="font-bold text-white transition-all duration-500 group-hover:text-[#3B82F6] group-hover:drop-shadow-[0_0_5px_rgba(59,130,246,0.5)]">
             холодну голову
           </span>{" "}
           тоді, коли все навколо горить. Для{" "}
-          <span className="font-mono bg-white/10 px-1.5 py-0.5 rounded transition-colors duration-500 group-hover:bg-[#3B82F6]/20 group-hover:text-[#3B82F6] text-white">
+          <span className="inline-block whitespace-nowrap font-mono bg-white/10 px-1.5 py-0.5 rounded transition-colors duration-500 group-hover:bg-[#3B82F6]/20 group-hover:text-[#3B82F6] text-white">
             IT-посади
           </span>{" "}
           під час івенту це критично — бо якщо щось ламається за 20 хвилин до
-          початку, команді потрібна людина, яка вирішує проблему.
+          початку, команді потрібна людина, яка вирішить цю проблему.
         </p>
       ),
     },
@@ -277,9 +276,8 @@ const WhyMe = () => {
       color: "#10B981", // Смарагдовий
       description: (
         <p>
-          Я відповідально ставлюсь до всього, за що берусь — і це не просто
-          красиві слова. Якщо задача на мені, вона буде зроблена. Не "зроблена
-          якось", не "зроблена аби здати" — а{" "}
+          Я відповідально ставлюсь до всього, за що берусь — і це не красиві
+          слова. Якщо задача на мені, вона буде зроблена. І{" "}
           <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#10B981]">
             зроблена так, щоб не соромно було показати команді
           </span>
@@ -287,9 +285,8 @@ const WhyMe = () => {
           сама розбираюсь і рухаюсь далі. Для мене важливо бути людиною, на яку
           можна{" "}
           <span className="font-bold text-white transition-all duration-500 group-hover:text-[#10B981] group-hover:drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]">
-            покластись у будь-який момент
+            покластись у будь-який момент.
           </span>
-          , без нагадувань і контролю.
         </p>
       ),
     },
@@ -301,7 +298,7 @@ const WhyMe = () => {
           <span className="font-black tracking-wider text-white transition-all duration-500 group-hover:text-[#F59E0B] group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">
             WORK HARD, PARTY HARDER
           </span>{" "}
-          — і цього я дотримуюсь свято. Для мене BTW — це не лише про технічну
+          — і цього я дотримуюсь свято. Для мене BTW — це не тільки про технічну
           роботу. Це про спільний вайб і ті моменти, коли вся{" "}
           <span className="font-medium text-white transition-colors duration-500 group-hover:text-[#F59E0B]">
             кортіма

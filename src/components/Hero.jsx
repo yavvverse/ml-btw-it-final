@@ -70,7 +70,7 @@ const Hero = () => {
                 BTW
               </span>
               , яку атмосферу хочу в нього принести — і чому{" "}
-              <span className="text-euphoria-blue font-black tracking-wide uppercase px-2 py-0.5 bg-euphoria-blue/10 border border-euphoria-blue/30 rounded-md">
+              <span className="inline-block whitespace-nowrap text-euphoria-blue font-black tracking-wide uppercase px-2 py-0.5 bg-euphoria-blue/10 border border-euphoria-blue/30 rounded-md">
                 IT responsible
               </span>{" "}
               — це саме моя посада. ✨
@@ -161,7 +161,7 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, x: -20, scale: 0.8 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
-                className="absolute left-full ml-4 whitespace-nowrap px-4 py-2 bg-gradient-to-r from-euphoria-blue/20 to-euphoria-purple/20 backdrop-blur-xl border border-euphoria-blue/50 rounded-xl text-sm text-white font-mono shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                className="absolute left-full ml-4 px-4 py-2 bg-gradient-to-r from-euphoria-blue/20 to-euphoria-purple/20 backdrop-blur-xl border border-euphoria-blue/50 rounded-xl text-sm text-white font-mono shadow-[0_0_20px_rgba(59,130,246,0.3)]"
               >
                 Bug fixed! Продакшн врятовано. Дайте мені цю посаду! 👾
               </motion.div>

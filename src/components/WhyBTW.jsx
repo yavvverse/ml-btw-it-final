@@ -372,7 +372,7 @@ const WhyBTW = () => {
 
               <p>
                 Я хочу, щоб{" "}
-                <span className="text-euphoria-blue font-bold tracking-wide uppercase px-1.5 py-0.5 bg-euphoria-blue/10 border border-euphoria-blue/30 rounded-md">
+                <span className="inline-block whitespace-nowrap text-euphoria-blue font-bold tracking-wide uppercase px-1.5 py-0.5 bg-euphoria-blue/10 border border-euphoria-blue/30 rounded-md">
                   IT-частина
                 </span>{" "}
                 цього івенту відповідала цій місії. Щоб сайт не просто давав
